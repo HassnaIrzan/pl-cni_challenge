@@ -15,8 +15,8 @@ sys.path.append(os.path.dirname(__file__))
 
 # import the Chris app superclass
 from chrisapp.base import ChrisApp
-# Import a python function that performs a matrix rotation
-from example_python.rotate import rotate_matrix
+# Import a pythton object of the classifier that does the prediction
+from classification import predict_diagnosis
 
 Gstr_title = """
 
@@ -160,11 +160,7 @@ class Cni_challenge(ChrisApp):
         """
 
         # To pass in a string
-        self.add_argument('--rot', dest='rot', type=str, optional=False,
-                          help='Type string: Name of file containing rotation matrix')
-
-        self.add_argument('--run_option', dest='run_option', type=str, optional=False,
-                      help='Type string: Define which code to run: python || C')
+        print("No paramas")
 
 
     def run(self, options):
@@ -176,41 +172,22 @@ class Cni_challenge(ChrisApp):
         print('Version: %s' % self.get_version())
 
         # ===============================================
-        # Initialising variables
-        # ===============================================
-        input_data_name = 'vectors.txt'                                     # Text file of vectors
-        output_classification_name = 'classification.txt'                   # Output text file of rotated vectors
-
+        # Initialising variables 
         # Input and output files must be in 'inputdir' and 'outputdir', respectively.
-        str_rotation_matrix = '%s/%s' % (options.inputdir, options.rot)     # File containing rotation matrices
-        str_vectors = '%s/%s' % (options.inputdir, input_data_name)
-        out_str= '%s/%s' % (options.outputdir, output_classification_name)
+        # ===============================================
+        
+        classifier = '%s/classifier.joblib' % (options.inputdir)           # the classifier to be used in prediction
+        input_dir = '%s/' % (options.inputdir)                             # input directory containing input variables
+        out_dir= '%s/' % (options.outputdir)                               # putput directory containing the output of the classification
 
         # ===============================================
         # Call code
         # ===============================================
-        if (options.run_option == 'python'):
-
-            # Call python module
-            print("\n")
-            print("\tCalling python code to perform vector rotations...")
-            rotate_matrix(str_rotation_matrix, str_vectors, out_str)
-            print ("\tOutput will be in %s" % out_str)
-            print("====================================================================================")
-
-        elif (options.run_option == 'C'):
-
-            # Call C example
-            print("\n")
-            print("\tC example to come....\n")
-            print("====================================================================================")
-        else:
-
-            print("\n")
-            sys.stderr.write('\tUnrecognised --run_option encountered. Note input is case-sensitive\n')
-            print("====================================================================================")
-            print(Gstr_synopsis)
-            sys.exit()
+        print("\n")
+        print("\tCalling python code to perform classification on aal atlas data ...")
+        predict_diagnosis(input_dir, out_dir, classifier)
+        print ("\tOutput will be in %s" % out_dir)
+        print("====================================================================================")
 
     def show_man_page(self):
         """
