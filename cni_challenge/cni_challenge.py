@@ -1,4 +1,4 @@
-#!/usr/bin/env python                                            
+#!/usr/bin/env python
 #
 # cni_challenge ds ChRIS plugin app
 #
@@ -20,14 +20,14 @@ from classification import predict_diagnosis
 
 Gstr_title = """
 
-            _  _____  _____  __   _____      _           _ _                       
-           (_)/ __  \|  _  |/  | |  _  |    | |         | | |                      
-  ___ _ __  _ `' / /'| |/' |`| | | |_| | ___| |__   __ _| | | ___ _ __   __ _  ___ 
+            _  _____  _____  __   _____      _           _ _
+           (_)/ __  \|  _  |/  | |  _  |    | |         | | |
+  ___ _ __  _ `' / /'| |/' |`| | | |_| | ___| |__   __ _| | | ___ _ __   __ _  ___
  / __| '_ \| |  / /  |  /| | | | \____ |/ __| '_ \ / _` | | |/ _ \ '_ \ / _` |/ _ \\
 | (__| | | | |./ /___\ |_/ /_| |_.___/ / (__| | | | (_| | | |  __/ | | | (_| |  __/
  \___|_| |_|_|\_____/ \___/ \___/\____/ \___|_| |_|\__,_|_|_|\___|_| |_|\__, |\___|
-                                    ______                               __/ |     
-                                   |______|                             |___/      
+                                    ______                               __/ |
+                                   |______|                             |___/
 
 """
 
@@ -35,7 +35,7 @@ Gstr_synopsis = """
 
     NAME
 
-       cni_challenge.py 
+       cni_challenge.py
 
     SYNOPSIS
 
@@ -59,7 +59,7 @@ Gstr_synopsis = """
             mkdir inputdir outputdir && chmod 777 outputdir
             python cni_challenge.py inputdir outputdir  --run_option python --rot rotation_matrices.txt
 
-            N.B. Required files (rotation_matrices.txt and vectors.txt) should be in 'inputdir' as provided in cni_challenge 
+            N.B. Required files (rotation_matrices.txt and vectors.txt) should be in 'inputdir' as provided in cni_challenge
             github repository.
 
             Output will be outputdir/classification.txt.
@@ -68,46 +68,46 @@ Gstr_synopsis = """
 
         `cni_challenge.py` has been created for MICCAI CNI 2019 Challenge
         http://www.brainconnectivity.net.
-        
+
         Solutions should be incorporated into this package and a container created through Docker.
         Submission to the Challenge will be a link to the Docker container.
-        
+
         `cni_challenge.py` contains currently contains a running python example.
 
     ARGS
 
-        <inputDir> 
+        <inputDir>
         Mandatory. A directory which contains all necessary input files.
-        
+
         <outputDir>
         Mandatory. A directory where output will be saved to. Must be universally writable to.
-        
+
         [--run_option < python || C >]
         Mandatory for bare bones example. C example still to come!
-        
+
         [--rot <matrix_file.txt>]
         Mandatory for bare bones example. String of file containing rotation matrices.
 
         [-h] [--help]
         If specified, show help message and exit.
-        
+
         [--json]
         If specified, show json representation of app and exit.
-        
+
         [--man]
         If specified, print (this) man page and exit.
 
         [--meta]
         If specified, print plugin meta data and exit.
-        
-        [--savejson <DIR>] 
-        If specified, save json representation file to DIR and exit. 
-        
+
+        [--savejson <DIR>]
+        If specified, save json representation file to DIR and exit.
+
         [-v <level>] [--verbosity <level>]
         Verbosity level for app. Not used currently.
-        
+
         [--version]
-        If specified, print version number and exit. 
+        If specified, print version number and exit.
 
 """
 
@@ -172,11 +172,11 @@ class Cni_challenge(ChrisApp):
         print('Version: %s' % self.get_version())
 
         # ===============================================
-        # Initialising variables 
+        # Initialising variables
         # Input and output files must be in 'inputdir' and 'outputdir', respectively.
         # ===============================================
-        
-        classifier = '%s/classifier.joblib' % (options.inputdir)           # the classifier to be used in prediction
+
+        classifier = 'classifier/classifier.joblib'                       # the classifier to be used in prediction
         input_dir = '%s/' % (options.inputdir)                             # input directory containing input variables
         out_dir= '%s/' % (options.outputdir)                               # putput directory containing the output of the classification
 
@@ -200,4 +200,3 @@ class Cni_challenge(ChrisApp):
 if __name__ == "__main__":
     chris_app = Cni_challenge()
     chris_app.launch()
-
