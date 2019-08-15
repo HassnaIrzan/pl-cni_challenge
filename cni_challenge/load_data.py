@@ -23,7 +23,7 @@ def read_data(input_dir, atlas):
 
     phenotype_all=pd.DataFrame()
     
-    fmri_dir = glob(input_dir+"sub-*/")
+    fmri_dir = sorted(lob(input_dir+"sub-*/"))
 
     for f in fmri_dir:
   
