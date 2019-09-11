@@ -176,9 +176,9 @@ class Cni_challenge(ChrisApp):
         input_dir = '%s/' % (options.inputdir)                             # input directory containing input variables
         out_dir= '%s/' % (options.outputdir)                               # putput directory containing the output of the classification
         evaluate_classification='evaluation/classification_metrics.py'     # path to the python script to evaluate classification
-        classification_file=out_dir+'/classification.txt'                  # path to the txt file containig the predictions
-        goundtruth_file=out_dir+'/goundtruth.txt'                          # path to the txt file containig the real data
-        output_file=out_dir+'/scores.txt'                                  # path to the txt file containig the perfomance of the classifier
+        classification_file=out_dir+'classification.txt'                  # path to the txt file containig the predictions
+        goundtruth_file=out_dir+'goundtruth.txt'                          # path to the txt file containig the real data
+        output_file=out_dir+'scores.txt'                                  # path to the txt file containig the perfomance of the classifier
 
         # ===============================================
         # Call code
