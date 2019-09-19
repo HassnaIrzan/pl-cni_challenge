@@ -10,7 +10,7 @@ from load_data import get_classification_data
 from joblib import  load
 import numpy as np
 
-def save_file(file_name, data, type_, format_)):
+def save_file(file_name, data, type_, format_):
 
     with open(file_name, "w") as f:
         np.savetxt(f, data.astype(type_), fmt=format_, delimiter=",")
