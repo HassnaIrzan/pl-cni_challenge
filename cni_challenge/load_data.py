@@ -44,11 +44,8 @@ def read_data(input_dir, atlas):
 
         ts, rois = np.shape(mat.transpose())
 
-        mapping = {'ADHD': 1, 'Control': 0}
-        phenotype_all = phenotype_all.replace({'DX': mapping})
-        diagnosis = phenotype_all["DX"].values
 
-    return timeseries, diagnosis
+    return timeseries
 
 
 def get_fconnectome(timeseries, kind):
@@ -64,8 +61,8 @@ def get_fconnectome(timeseries, kind):
 
 def get_classification_data(input_dir, atlas):
 
-    timeseries, diagnosis = read_data(input_dir, atlas)
+    timeseries = read_data(input_dir, atlas)
 
     conn_coefs = get_fconnectome(timeseries, 'correlation')
 
-    return conn_coefs, diagnosis
+    return conn_coefs
