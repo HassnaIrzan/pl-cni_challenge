@@ -172,22 +172,16 @@ class Cni_challenge(ChrisApp):
         # Input and output files must be in 'inputdir' and 'outputdir', respectively.
         # ===============================================
 
-        classifier = 'classifier/classifier.joblib'                        # the classifier to be used in prediction
+        classifier = 'classifier/classifier_L_SVC.joblib'                  # the classifier to be used in prediction
+        calib_classifier = 'classifier/classifier_L_SVC_calib.joblib'      # the calibrated classifier
         input_dir = '%s/' % (options.inputdir)                             # input directory containing input variables
         out_dir= '%s/' % (options.outputdir)                               # putput directory containing the output of the classification
-        evaluate_classification='evaluation/classification_metrics.py'     # path to the python script to evaluate classification
-        classification_file=out_dir+'classification.txt'                  # path to the txt file containig the predictions
-        goundtruth_file=out_dir+'goundtruth.txt'                          # path to the txt file containig the real data
-        output_file=out_dir+'scores.txt'                                  # path to the txt file containig the perfomance of the classifier
-
         # ===============================================
         # Call code
         # ===============================================
         print("\n")
         print("\tCalling python code to perform classification on aal atlas data ...")
-        predict_diagnosis(input_dir, out_dir, classifier)
-        print("\tCalling python code to evaluate the perfomance of the classifier ...")
-        os.system("python3 "+evaluate_classification+" -p "+classification_file+" -g "+goundtruth_file+" -o "+output_file)
+        predict_diagnosis(input_dir, out_dir, classifier, calib_classifier)
         print ("\tOutput will be in %s" % out_dir)
         print("====================================================================================")
 
