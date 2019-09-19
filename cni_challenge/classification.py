@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jul 31 15:19:37 2019
-
 @author: HassnaIrzan
 """
 from load_data import get_classification_data
@@ -20,7 +19,7 @@ def predict_diagnosis(input_dir, ouput_dir, classifier, calib_classifier):
 
     atlas="aal"
 
-    conn_coefs, diagnosis = get_classification_data(input_dir, atlas)
+    conn_coefs = get_classification_data(input_dir, atlas)
 
     classifier_fit = load(classifier)
     diagnosis_predict = classifier_fit.predict(conn_coefs)
