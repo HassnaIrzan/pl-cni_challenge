@@ -10,25 +10,27 @@ from load_data import get_classification_data
 from joblib import  load
 import numpy as np
 
-def save_file(file_name, data):
+def save_file(file_name, data, type_, format_)):
 
     with open(file_name, "w") as f:
-        np.savetxt(f, data.astype(int), fmt='%i', delimiter=",")
+        np.savetxt(f, data.astype(type_), fmt=format_, delimiter=",")
 
 
-def predict_diagnosis(input_dir, ouput_dir, classifier):
+def predict_diagnosis(input_dir, out_dir, classifier, calib_classifier):
 
     atlas="aal"
 
     conn_coefs, diagnosis = get_classification_data(input_dir, atlas)
 
     classifier_fit = load(classifier)
-
     diagnosis_predict = classifier_fit.predict(conn_coefs)
 
+    classifier_calib_fit = load(calib_classifier)
+    probabilities = classifier_calib_fit.predict_proba(conn_coefs)
     # Output and save
     output_prediction_file_name = ouput_dir+'classification.txt'
-    output_goundtruth_file_name = ouput_dir+'goundtruth.txt'
+    output_probabilities_file_name = ouput_dir+'scores.txt'
 
-    save_file(output_prediction_file_name, diagnosis_predict)
-    save_file(output_goundtruth_file_name, diagnosis)
+
+    save_file(output_prediction_file_name, diagnosis_predict, int, '%i')
+    save_file(output_probabilities_file_name, probabilities, float,  '%f  ')
