@@ -16,7 +16,7 @@ def save_file(file_name, data, type_, format_):
         np.savetxt(f, data.astype(type_), fmt=format_, delimiter=",")
 
 
-def predict_diagnosis(input_dir, out_dir, classifier, calib_classifier):
+def predict_diagnosis(input_dir, ouput_dir, classifier, calib_classifier):
 
     atlas="aal"
 
