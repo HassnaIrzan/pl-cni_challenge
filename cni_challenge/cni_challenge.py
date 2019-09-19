@@ -156,7 +156,7 @@ class Cni_challenge(ChrisApp):
         """
 
         # To pass in a string
-        print("No additional paramas are requested")
+        
 
 
     def run(self, options):
