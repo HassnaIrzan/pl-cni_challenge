@@ -18,32 +18,14 @@ import re, os
 def read_data(input_dir, atlas):
 
     timeseries = list()
-
-    sbj_id= list()
-
-    phenotype_all=pd.DataFrame()
-
     fmri_dir = sorted(glob(input_dir+"sub-*/"))
 
     for f in fmri_dir:
 
-        base_name=os.path.basename(os.path.normpath(f))
-
-        num=str(re.findall('\d+',base_name)[0])
-
-        sbj_id.append(num)
-
         mat = np.genfromtxt(f+'/timeseries_'+atlas+'.csv', delimiter=',')
-
-
         timeseries.append(mat.transpose())
 
-        phenotype_sbj = pd.read_csv(f+'/phenotypic.csv')
-
-        phenotype_all = pd.concat([phenotype_all, phenotype_sbj])
-
-        ts, rois = np.shape(mat.transpose())
-
+        
 
     return timeseries
 
